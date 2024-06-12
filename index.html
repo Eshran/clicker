@@ -6,7 +6,7 @@
     <title>Кликер Эллиот</title>
     <script>
         document.addEventListener('DOMContentLoaded', function (){
-            if(!/Mobi|Android/i.test(navigator.userAgent)){
+            if(!/Mobi|Android/i.test(navigator.userAgent)   ){
                 window.location.href = 'noPC.html'
             }
         })
@@ -24,11 +24,62 @@
             margin: 0;
             touch-action: manipulation;
         }
+
         #clicker-container {
             text-align: center;
             margin-bottom: 20px;
         }
-        #clicker-button, #shop-button {
+
+        #clicker-container {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px 0;
+            width: 200px;
+        }
+
+        #clicker-button {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #0062cc, #00aaff);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        #clicker-button:hover {
+            background: linear-gradient(145deg, #0056b3, #0099dd);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #clicker-button:active {
+            background: linear-gradient(145deg, #004999, #0088bb);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        #shop-button {
             text-align: center;
             padding: 15px 30px;
             font-size: 20px;
@@ -39,10 +90,11 @@
             cursor: pointer;
             transition: background-color 0.3s;
             display: block;
-            margin: 10px 0;
+            margin: 25px 0;
             width: 200px;
             touch-action: manipulation;
         }
+
         #clicker-button:hover, #shop-button:hover {
             background-color: #0056b3;
         }
@@ -50,6 +102,7 @@
             font-size: 36px;
             margin-bottom: 30px;
         }
+
         #shop-overlay {
             display: none;
             position: fixed;
@@ -59,12 +112,15 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
             touch-action: manipulation;
         }
+        
         #shop-container {
-            text-align: center;
             display: none;
             position: fixed;
+            text-align: center;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -75,6 +131,8 @@
             width: 80%;
             max-width: 400px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
             touch-action: manipulation;
         }
         .shop-item {
@@ -115,8 +173,8 @@
 <body>
     <div id="clicker-container">
         <div id="click-count">0</div>
-        <button id="clicker-button">Кликни меня!</button>
-        <button id="shop-button">Магазин</button>
+        <button id="clicker-button" class="button">Кликни меня!</button>
+        <button id="shop-button" class="button">Магазин</button>
     </div>
     <div id="shop-overlay"></div>
     <div id="shop-container">

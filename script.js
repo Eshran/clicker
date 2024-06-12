@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const tg = window.Telegram.WebApp
 
-    let clickCount = 0;
+    let clickCount = localStorage.getItem("clickCount") ? parseInt(localStorage.getItem("clickCount")) : 0;
     let clickValue = 1;
+
+    clickCountDisplay.textContent = clickCount
 
     clickButton.addEventListener("click", function() {
         const plusOne = document.createElement("div");
@@ -27,16 +29,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
         clickCount += clickValue;
         clickCountDisplay.textContent = clickCount;
+
+        localStorage.setItem("clickCount", clickCount);
     });
 
     shopButton.addEventListener("click", function() {
-        shopContainer.style.display = (shopContainer.style.display === "none" || shopContainer.style.display === "") ? "block" : "none";
-        shopOverlay.style.display = (shopOverlay.style.display === "none" || shopOverlay.style.display === "") ? "block" : "none";
+        shopOverlay.style.display = 'block';
+        shopContainer.style.display = 'block';
+
+        shopOverlay.offsetHeight;
+        shopContainer.offsetHeight;
+
+        shopOverlay.style.opacity = '1';
+        shopContainer.style.opacity = '1';
+        shopContainer.style.transform = 'translate(-50%, -50%) scale(1)';
     });
 
     shopOverlay.addEventListener("click", function() {
-        shopContainer.style.display = "none";
-        shopOverlay.style.display = "none";
+        shopOverlay.style.opacity = '0';
+        shopContainer.style.opacity = '0';
+        shopContainer.style.transform = 'translate(-50%, -50%) scale(0.9)';
+
+        setTimeout(() => {
+            shopOverlay.style.display = 'none';
+            shopContainer.style.display = 'none';
+        }, 300);
     });
 
     document.querySelectorAll('.shop-item button').forEach(button => {
